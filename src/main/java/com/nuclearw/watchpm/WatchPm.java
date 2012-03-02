@@ -145,7 +145,7 @@ public class WatchPm extends JavaPlugin {
     public void broadcastToStalkers(String mSender, String mReceiver, String mMessage) {
     	Player[] online = getServer().getOnlinePlayers();
     	for(int i = 0; i < online.length; i++) {
-    		if(!hasPermission(online[i], "watchpm.stalker")) break;
+    		if(!online[i].hasPermission("watchpm.stalker")) break;
     		online[i].sendMessage(mSender + " -> " + mReceiver + ": " + mMessage);
     	}
     	if(this.pmLogging) this.pmlog.info(mSender + " -> " + mReceiver + ": " + mMessage);
@@ -154,7 +154,7 @@ public class WatchPm extends JavaPlugin {
     public void broadcastToStalkers(String rSender, String rMessage) {
     	Player[] online = getServer().getOnlinePlayers();
     	for(int i = 0; i < online.length; i++) {
-    		if(!hasPermission(online[i], "watchpm.stalker")) break;
+    		if(!online[i].hasPermission("watchpm.stalker")) break;
     		online[i].sendMessage(rSender + " replied: " + rMessage);
     	}
     	if(this.pmLogging) this.pmlog.info(rSender + " replied: " + rMessage);
