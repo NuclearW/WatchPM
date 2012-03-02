@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.event.Event.Priority;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -124,7 +123,7 @@ public class WatchPm extends JavaPlugin {
 		}
 		
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, playerListener, Priority.Monitor, this);
+		pm.registerEvents(playerListener, this);
 		
 		log.info("[WatchPM] version "+this.getDescription().getVersion()+" loaded.");
 	}

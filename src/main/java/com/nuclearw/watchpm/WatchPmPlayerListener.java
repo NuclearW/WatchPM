@@ -3,19 +3,21 @@ package com.nuclearw.watchpm;
 import java.util.ArrayList;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerListener;
-
 import com.nuclearw.watchpm.WatchPm;
 
 
-public class WatchPmPlayerListener extends PlayerListener {
+public class WatchPmPlayerListener implements Listener {
 	public static WatchPm plugin;
 	
 	public WatchPmPlayerListener(WatchPm instance) {
 		plugin = instance;
 	}
 
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerCommandPreprocess (PlayerCommandPreprocessEvent event) {
 		String command = event.getMessage();
 		if(!command.startsWith("/")) return;
