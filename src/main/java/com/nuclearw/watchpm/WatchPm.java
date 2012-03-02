@@ -147,50 +147,6 @@ public class WatchPm extends JavaPlugin {
 		log.info("[WatchPM] version "+this.getDescription().getVersion()+" unloaded.");
 	}
 	
-	/*
-	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		for(int i = 0; i <= this.mCommands.length; i++) {
-			if(cmd.getName().equalsIgnoreCase(this.mCommands[i])) {
-				if(args.length < 2) return true;
-				String mSender = null;
-				if(!isPlayer(sender)) {
-					mSender = "Console";
-				} else {
-					Player mSenderPlayer = (Player) sender;
-					mSender = mSenderPlayer.getName();
-				}
-				if(!getServer().getPlayer(args[0]).isOnline()) return true;
-				String mReceiver = getServer().getPlayer(args[0]).getName();
-				String mMessage = null;
-				for(int j = 1; j+1 <= args.length; j++) {
-					mMessage = mMessage + " " + args[j];
-				}
-				mMessage = mMessage.trim();
-				broadcastToStalkers(mSender, mReceiver, mMessage);
-			}
-		}
-		for(int i = 0; i <= this.rCommands.length; i++) {
-			if(cmd.getName().equalsIgnoreCase(this.rCommands[i])) {
-				if(args.length < 1) return true;
-				String rSender = null;
-				if(!isPlayer(sender)) {
-					rSender = "Console";
-				} else {
-					Player rSenderPlayer = (Player) sender;
-					rSender = rSenderPlayer.getName();
-				}
-				String rMessage = null;
-				for(int j = 0; j+1 <= args.length; j++) {
-					rMessage = rMessage + " " + args[j];
-				}
-				rMessage = rMessage.trim();
-				broadcastToStalkers(rSender, rMessage);
-			}
-		}
-		return true;
-	}
-	*/
-	
     public void broadcastToStalkers(String mSender, String mReceiver, String mMessage) {
     	Player[] online = getServer().getOnlinePlayers();
     	for(int i = 0; i < online.length; i++) {
