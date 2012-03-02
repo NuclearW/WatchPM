@@ -1,0 +1,14 @@
+== WatchPM
+
+WatchPM lets you be a stalker and watch private messages
+
+=== Permissions
+
+* watchpm.stalker
+** //Allows you to watch pm's//
+
+All permissions default to **op**
+
+=== Compiling
+
+Maven 3 is required to compile WatchPM

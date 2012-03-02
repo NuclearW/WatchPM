@@ -1,0 +1,13 @@
+name: WatchPM
+main: com.nuclearw.watchpm.WatchPm
+version: ${project.version}
+author: NuclearW
+description: WatchPM lets you be a stalker and watch private messages
+permissions:
+    watchpm.*:
+        description: Implies watchpm.stalker
+        children:
+            watchpm.stalker: true
+    watchpm.stalker:
+        description: Allows you to watch pm's
+        default: op
