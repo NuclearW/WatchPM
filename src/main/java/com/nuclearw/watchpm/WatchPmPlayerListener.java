@@ -12,7 +12,7 @@ import com.nuclearw.watchpm.WatchPm;
 
 public class WatchPmPlayerListener implements Listener {
 	public static WatchPm plugin;
-	
+
 	public WatchPmPlayerListener(WatchPm instance) {
 		plugin = instance;
 	}
@@ -22,32 +22,12 @@ public class WatchPmPlayerListener implements Listener {
 		String command = event.getMessage();
 		if(!command.startsWith("/")) return;
 		command = command.substring(1);
-		
+
 		//String[] args = null;
 		String cmd = null;
 		ArrayList<String> args = new ArrayList<String>();
 		int i =0;
-		
-		/*
-		if(command.contains(" ")) {
-			args = command.split(" ");
-			cmd = args[0];
-			//System.arraycopy(args, 1, args, 0, args.length - 1) ;
-			if(args.length == 1) return;
-			if(args.length > 1) {
-				String[] newArgs = new String[args.length-1];
-				for(int i = 1; i < args.length-1; i++) {
-					newArgs[i] = args[i];
-				}
-				args = newArgs;
-			}
-		} else {
-			cmd = command;
-		}
-		
-		if(args == null) return;
-		*/
-		
+
 		if(command.contains(" ")) {
 			String commandCut = command;
 			int spaceindex = commandCut.indexOf(" ");
@@ -66,7 +46,7 @@ public class WatchPmPlayerListener implements Listener {
 		} else {
 			cmd = command;
 		}
-		
+
 		for(int j = 0; j < plugin.mCommands.length; j++) {
 			if(cmd.equalsIgnoreCase(plugin.mCommands[j])) {
 				if(args.size() < 2) return;

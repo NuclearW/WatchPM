@@ -7,7 +7,7 @@ import java.util.logging.LogRecord;
 
 public class WatchPmFormatter extends Formatter {
 	private static final String lineSep = System.getProperty("line.separator");
-	
+
 	public String format(LogRecord record) {
 		String loggerName = record.getLoggerName();
 		if(loggerName == null) {

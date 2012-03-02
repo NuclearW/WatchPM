@@ -22,24 +22,22 @@ public class WatchPm extends JavaPlugin {
 	static File version = new File(mainDirectory + File.separator + "VERSION");
 	static File config = new File(mainDirectory + File.separator + "config");
 	static Properties prop = new Properties();
-	
+
 	private final WatchPmPlayerListener playerListener = new WatchPmPlayerListener(this);
-	
+
 	public String[] mCommands = new String[64];
 	public String[] rCommands = new String[64];
-	
-	//public Player[] stalkers = null; 
-	
+
 	Logger log = Logger.getLogger("Minecraft");
 	Logger pmlog = Logger.getLogger("PMLog");
-	
+
 	public Boolean pmLogging = true;
-	
+
 	public void onEnable() {
 		new File(mainDirectory).mkdir();
-		
+
 		if((new File(mainDirectory + "no.log")).exists()) this.pmLogging = false;
-		
+
 		if(!config.exists()) {
 			try {
 				config.createNewFile();
@@ -53,15 +51,15 @@ public class WatchPm extends JavaPlugin {
 				ex.printStackTrace();
 			}
 		}
-		
+
 		try {
-		    FileHandler pmlogHandler = new FileHandler(mainDirectory + File.separator + "pm.log", true);
-		    pmlogHandler.setFormatter(new WatchPmFormatter());
-		    this.pmlog.addHandler(pmlogHandler);
+			FileHandler pmlogHandler = new FileHandler(mainDirectory + File.separator + "pm.log", true);
+			pmlogHandler.setFormatter(new WatchPmFormatter());
+			this.pmlog.addHandler(pmlogHandler);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		FileInputStream in;
 		try {
 			in = new FileInputStream(config);
@@ -71,12 +69,12 @@ public class WatchPm extends JavaPlugin {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		
+
 		String mCommandsProp = prop.getProperty("MessageCommands");
 		String rCommandsProp = prop.getProperty("ReplyCommands");
-		
+
 		int i = 0;
-		
+
 		if(mCommandsProp.contains(",")) {
 			String mCommandsCut = mCommandsProp;
 			do {
@@ -93,7 +91,7 @@ public class WatchPm extends JavaPlugin {
 			this.mCommands[0] = mCommandsProp;
 			log.info("Loaded message command: "+this.mCommands[0]);
 		}
-		
+
 		if(rCommandsProp.contains(",")) {
 			String rCommandsCut = rCommandsProp;
 			do {
@@ -110,7 +108,7 @@ public class WatchPm extends JavaPlugin {
 			this.rCommands[0] = rCommandsProp;
 			log.info("Loaded message command: "+this.rCommands[0]);
 		}
-		
+
 		if(!version.exists()) {
 			updateVersion();
 		} else {
@@ -120,13 +118,13 @@ public class WatchPm extends JavaPlugin {
 					|| vnum.equals("0.2.2")) updateFrom(1);
 			//In the future past versions can be checked for and dealt with here.
 		}
-		
+
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(playerListener, this);
-		
+
 		log.info("[WatchPM] version "+this.getDescription().getVersion()+" loaded.");
 	}
-	
+
 	public void updateFrom(int age) {
 		switch (age) {
 			case 1:
@@ -135,33 +133,33 @@ public class WatchPm extends JavaPlugin {
 				updateVersion();
 		}
 	}
-	
+
 	public void onDisable() {
 		log.info("[WatchPM] version "+this.getDescription().getVersion()+" unloaded.");
 	}
-	
-    public void broadcastToStalkers(String mSender, String mReceiver, String mMessage) {
-    	Player[] online = getServer().getOnlinePlayers();
-    	for(int i = 0; i < online.length; i++) {
-    		if(!online[i].hasPermission("watchpm.stalker")) break;
-    		online[i].sendMessage(mSender + " -> " + mReceiver + ": " + mMessage);
-    	}
-    	if(this.pmLogging) this.pmlog.info(mSender + " -> " + mReceiver + ": " + mMessage);
+
+	public void broadcastToStalkers(String mSender, String mReceiver, String mMessage) {
+		Player[] online = getServer().getOnlinePlayers();
+		for(int i = 0; i < online.length; i++) {
+			if(!online[i].hasPermission("watchpm.stalker")) break;
+			online[i].sendMessage(mSender + " -> " + mReceiver + ": " + mMessage);
+		}
+		if(this.pmLogging) this.pmlog.info(mSender + " -> " + mReceiver + ": " + mMessage);
 	}
 
-    public void broadcastToStalkers(String rSender, String rMessage) {
-    	Player[] online = getServer().getOnlinePlayers();
-    	for(int i = 0; i < online.length; i++) {
-    		if(!online[i].hasPermission("watchpm.stalker")) break;
-    		online[i].sendMessage(rSender + " replied: " + rMessage);
-    	}
-    	if(this.pmLogging) this.pmlog.info(rSender + " replied: " + rMessage);
+	public void broadcastToStalkers(String rSender, String rMessage) {
+		Player[] online = getServer().getOnlinePlayers();
+		for(int i = 0; i < online.length; i++) {
+			if(!online[i].hasPermission("watchpm.stalker")) break;
+			online[i].sendMessage(rSender + " replied: " + rMessage);
+		}
+		if(this.pmLogging) this.pmlog.info(rSender + " replied: " + rMessage);
 	}
-    
+
 	public boolean isPlayer(CommandSender sender) {
-        return sender != null && sender instanceof Player;
-    }
-	
+		return sender != null && sender instanceof Player;
+	}
+
 	public void updateVersion() {
 		try {
 			version.createNewFile();
@@ -174,8 +172,6 @@ public class WatchPm extends JavaPlugin {
 			ex.printStackTrace();
 		}
 	}
-	
-	
 
 	public String readVersion() {
 		byte[] buffer = new byte[(int) version.length()];
@@ -190,7 +186,7 @@ public class WatchPm extends JavaPlugin {
 		} finally {
 			if (f != null) try { f.close(); } catch (IOException ignored) { }
 		}
-		
+
 		return new String(buffer);
 	}
 }
