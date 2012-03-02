@@ -123,8 +123,6 @@ public class WatchPm extends JavaPlugin {
 			//In the future past versions can be checked for and dealt with here.
 		}
 		
-		WatchPmPermissionsHandler.initialize(getServer());
-		
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, playerListener, Priority.Monitor, this);
 		
