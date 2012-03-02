@@ -26,8 +26,6 @@ public class WatchPm extends JavaPlugin {
 	static Properties prop = new Properties();
 	
 	private final WatchPmPlayerListener playerListener = new WatchPmPlayerListener(this);
-	private final WatchPmPluginListener pluginListener = new WatchPmPluginListener(this);
-	private final WatchPmPermissionsHandler permissionsHandler = new WatchPmPermissionsHandler(this);
 	
 	public String[] mCommands = new String[64];
 	public String[] rCommands = new String[64];
@@ -129,7 +127,6 @@ public class WatchPm extends JavaPlugin {
 		
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, playerListener, Priority.Monitor, this);
-		pm.registerEvent(Event.Type.PLUGIN_ENABLE, pluginListener, Priority.Monitor, this);
 		
 		log.info("[WatchPM] version "+this.getDescription().getVersion()+" loaded.");
 	}
@@ -163,10 +160,6 @@ public class WatchPm extends JavaPlugin {
     		online[i].sendMessage(rSender + " replied: " + rMessage);
     	}
     	if(this.pmLogging) this.pmlog.info(rSender + " replied: " + rMessage);
-	}
-    
-	public boolean hasPermission(Player player, String permission) {
-		return permissionsHandler.hasPermission(player, permission);
 	}
     
 	public boolean isPlayer(CommandSender sender) {
